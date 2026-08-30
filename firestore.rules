@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default Deny All Catch-All
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // User-isolated Journal Entries collection
+    match /users/{userId}/entries/{entryId} {
+      allow get, delete: if isOwner(userId) && isValidId(entryId);
+      
+      allow list: if isOwner(userId);
+      
+      allow create: if isOwner(userId)
+                    && isValidId(entryId)
+                    && request.resource.data.userId == userId
+                    && request.resource.data.id == entryId;
+                    
+      allow update: if isOwner(userId)
+                    && isValidId(entryId)
+                    && request.resource.data.userId == userId
+                    && resource.data.userId == userId;
+    }
+
+    // User-isolated Weekly Growth Digests
+    match /users/{userId}/digests/{digestId} {
+      allow get, delete: if isOwner(userId) && isValidId(digestId);
+      
+      allow list: if isOwner(userId);
+      
+      allow create: if isOwner(userId)
+                    && isValidId(digestId)
+                    && request.resource.data.userId == userId
+                    && request.resource.data.id == digestId;
+                    
+      allow update: if isOwner(userId)
+                    && isValidId(digestId)
+                    && request.resource.data.userId == userId
+                    && resource.data.userId == userId;
+    }
+  }
+}

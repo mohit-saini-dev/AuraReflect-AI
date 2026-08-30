@@ -1,0 +1,10 @@
+{
+  "name": "AuraReflect",
+  "description": "An ultra-modern AI Journaling Companion with live speech-to-text dictation, real-time streaming responses, emotional tone synthesis, and dark glassmorphic design.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

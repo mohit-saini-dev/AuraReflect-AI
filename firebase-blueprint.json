@@ -1,0 +1,131 @@
+{
+  "entities": {
+    "JournalEntry": {
+      "title": "JournalEntry",
+      "description": "A single user journal session containing reflections, multi-turn messages, mood detection, summary, and action items.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the journal entry",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the owner",
+          "maxLength": 128
+        },
+        "title": {
+          "type": "string",
+          "description": "Title or headline of the reflection session",
+          "maxLength": 200
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO 8601 creation timestamp string",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO 8601 last update timestamp string",
+          "maxLength": 64
+        },
+        "mood": {
+          "type": "string",
+          "description": "Emotional tone identified (e.g., Optimistic, Focused, Anxious, Reflective, Grateful, Energized, Peaceful, Overwhelmed)",
+          "maxLength": 64
+        },
+        "summary": {
+          "type": "string",
+          "description": "1-2 sentence executive summary of reflections",
+          "maxLength": 1000
+        },
+        "takeaways": {
+          "type": "array",
+          "description": "List of actionable takeaways or micro-habits"
+        },
+        "reflectionQuestions": {
+          "type": "array",
+          "description": "List of prompt questions for deeper inquiry"
+        },
+        "messages": {
+          "type": "array",
+          "description": "Multi-turn chat exchanges between user and Gemini assistant"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Categorical tags"
+        },
+        "isFavorite": {
+          "type": "boolean",
+          "description": "Flag indicating if user bookmarked this session"
+        }
+      },
+      "required": ["id", "userId", "createdAt", "messages"]
+    },
+    "WeeklyDigest": {
+      "title": "WeeklyDigest",
+      "description": "7-day synthesized growth digest of wins, patterns, and areas of expansion.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique digest identifier",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the owner",
+          "maxLength": 128
+        },
+        "weekStartDate": {
+          "type": "string",
+          "description": "Start date for the 7-day period",
+          "maxLength": 64
+        },
+        "weekEndDate": {
+          "type": "string",
+          "description": "End date for the 7-day period",
+          "maxLength": 64
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp",
+          "maxLength": 64
+        },
+        "wins": {
+          "type": "array",
+          "description": "Key wins celebrated across the week"
+        },
+        "emotionalPatterns": {
+          "type": "array",
+          "description": "Dominant emotional rhythms identified"
+        },
+        "growthAreas": {
+          "type": "array",
+          "description": "Areas identified for growth and introspection"
+        },
+        "overallSummary": {
+          "type": "string",
+          "description": "Holistic narrative summary of the week",
+          "maxLength": 2000
+        },
+        "keyInsights": {
+          "type": "array",
+          "description": "Top breakthrough insights"
+        }
+      },
+      "required": ["id", "userId", "createdAt", "overallSummary"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/entries/{entryId}": {
+      "schema": "JournalEntry",
+      "description": "User-scoped private journal entries and reflection conversations"
+    },
+    "/users/{userId}/digests/{digestId}": {
+      "schema": "WeeklyDigest",
+      "description": "User-scoped weekly growth digests and synthesis reports"
+    }
+  }
+}
