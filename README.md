@@ -1,7 +1,15 @@
 # AuraReflect — AI Journaling Companion
 
-A production-grade, user-authenticated personal reflection and growth journaling web application powered by **Gemini 3.6 Flash**, **Web Speech API Dictation**, **Server-Sent Events (SSE) Response Streaming**, **Firebase Authentication**, and **Cloud Firestore**.
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React / Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Gemini](https://img.shields.io/badge/Google%20Gemini-8E75C2?style=flat&logo=googlegemini&logoColor=white)](https://ai.google.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Google Cloud Run](https://img.shields.io/badge/Google%20Cloud%20Run-4285F4?style=flat&logo=googlecloud&logoColor=white)](https://cloud.google.com/run)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+> **A production-grade, user-authenticated personal reflection and growth journaling application powered by Gemini, Web Speech API Dictation, Server-Sent Events (SSE) Response Streaming, Firebase Authentication, and Cloud Firestore.**
+
+---
 ---
 
 ## 🏛️ System Architecture & Threat Model
